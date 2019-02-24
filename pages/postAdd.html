@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>OLX Application</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="../css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/login.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="">OLX</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <div class="form-inline my-2 my-lg-0">
+                <!-- <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button> -->
+            </div>
+
+            <div class="form-inline ml-auto">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Login</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="signup.html">Sign Up</a>
+                            <a class="dropdown-item" href="signin.html">Sign In</a>
+                        </div>
+                    </li>
+                </ul>
+                <div>
+                    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3">Sell</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- Collapsible content -->
+
+    </nav>
+    <!--/.Navbar-->
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="post-cont">
+                <div class="post-head">
+                    <h2 class="text-center">POST YOUR AD</h2>
+                </div>
+
+                <div class="post-list">
+                    <div class="card">
+                        <div class="card-head">
+                            <h4 class="card-title post-title">Choose A category</h4>
+                        </div>
+                        <div class="card-body">
+                        <div class="category-list">
+                            <ul class="list-group">
+                                <a href="#">
+                                    <li class="list-group-item" id="l1" onclick="selectList(this)">Cars</li>
+                                </a>
+                                <a href="#">
+                                    <li class="list-group-item" id="l2" onclick="selectList(this)">Bikes</li>
+                                </a>
+                                <a href="#">
+                                    <li class="list-group-item" id="l3" onclick="selectList(this)">Mobiles</li>
+                                </a>
+                                <a href="#">
+                                    <li class="list-group-item" id="l4" onclick="selectList(this)">Electronic & Appliances</li>
+                                </a>
+                            </ul>
+                        </div>
+                        <div class="text-center"> 
+                            <button class="btn btn-primary">Proceed</button>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./user.js"></script>
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../js/mdb.js"></script>
+</body>
+
+</html>

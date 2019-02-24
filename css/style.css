@@ -1,0 +1,123 @@
+.category{
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+}
+.category ul>li>a{
+    font-size: 1.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.custom-grid{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.nav-icons{
+    font-size: 1.4em;
+}
+
+.ctm-container{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.ctm-list-group{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 32px;
+}
+.ctm-list-group li {
+background-color: #fff;
+    border-top: 1px solid rgba(0,47,52,.2);
+    border-left: 1px solid rgba(0,47,52,.2);
+    display: inline-block;
+    /* font-size: 10px; */
+    vertical-align: top;
+    text-align: left;
+    box-sizing: border-box;
+    width: 25%;
+}
+
+/* home */
+
+.box-list{
+    border: 1px solid rgb(179, 177, 177);
+}
+.category-list-name{
+    font-size: 1.1em;
+    margin-left: 10px;
+    text-transform: capitalize;
+}
+
+.category-name{
+    padding: 0.8em;
+    padding-bottom: 0.3em;
+    font-size:1.3em;
+    color: black;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.home-sub-head{
+    margin-top: 2em;
+}
+.home-sub-head h3{
+    font-weight: 500
+}
+.home-sub-head p{
+    font-size: 1.1em;
+}
+/* Post Add */
+.category-list{
+    width: 70%;
+    /* margin-left: 2em; */
+}
+.post-list{
+    width: 80%;
+    margin: 0 auto;
+}
+.post-title{
+    margin-left: 1.5em;
+}
+.post-head{
+    margin-top: 3em;
+    margin-bottom: 2em
+}
+
+/* create add */
+
+.post-btn{
+    margin-top: 1.5em;
+}
+.post-form{
+    width: 80%;
+}
+
+/* footer */
+
+.light-gray{
+    background-color: #ebeeef !important;
+    color:rgb(36, 34, 34) !important;
+    margin-top: 3em;
+}
+.dark-gray{
+    background-color: #002f34 !important;
+}
+.page-footer ul>li>a{
+    color: rgb(100, 96, 96)
+}
+.footer-text-l{
+    margin-left: 2em;
+    color: white;
+}
+.footer-text-l > span {
+    font-weight: 500;
+    margin-right: 0.3em;
+}
+
+.footer-text-r{
+    margin-right: 3em;
+    color: white;
+}
+.footer-text-r > span {
+    font-weight: 500;
+}

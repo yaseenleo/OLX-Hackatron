@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="jumbotron">
+                <h4 class="text-center">Chatting</h4>
+            </div>
+            <hr>
+            <div class="container" id='signup_div'>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Signup</h5>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="username" id='n_user'><br>
+                            <input type="text" class="form-control" placeholder="password" id='n_pass'><br>
+
+                            <button class='btn btn-primary' onclick="signup()">Proceed</button>
+                            <span>Already signed up? then signin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" id='signin_div'>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Signin</h5>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="username" id='l_user'><br>
+                            <input type="text" class="form-control" placeholder="password" id='l_pass'><br>
+
+                            <button class='btn btn-primary' onclick="signin()">Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" id='user_select_div' style='display: none'>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="" class="forrm-control-label">Choose The Person You Want To Chat</label>
+                            <select class='form-control' id='users_list'></select>
+                            <button class="btn btn-primary" onclick='select_opponent()'>Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" id='chat_div' style='display: none'>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="text-center">Your Chat</h6>
+                            </div>
+                            <div class="card-body">
+                                <ul id='your_chat_list'>
+
+                                </ul>
+                                <br>
+                                <hr>
+                                <div class="form-inline">
+                                    <input type="text" class="form-control" placeholder="Your message" id='msg_input'>
+                                    <button class='btn btn-primary' onclick="send_message()">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="text-center">Their Chat</h6>
+                            </div>
+                            <div class="card-body">
+                                    <ul id='other_chat_list'>
+
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+    <script>
+        let user = null;
+        let opponent = null;
+        let db = firebase.database();
+
+        function signup() {
+            let username = document.getElementById('n_user').value;
+            let pass = document.getElementById('n_pass').value;
+            db.ref('olx/' + username).once('value', function (data) {
+                // console.log(data.val());
+                if (data.val() === null) {
+                    db.ref('olx/' + user).set({
+                        password: pass
+                    }).then(() => {
+                        alert("user successfully created")
+                    })
+                }
+                else {
+                    alert("username already exist");
+                }
+            })
+
+        }
+        function signin() {
+            let username = document.getElementById('l_user').value;
+            let pass = document.getElementById('l_pass').value;
+            db.ref('olx/' + username).once('value', function (data) {
+                let u = data.val();
+                if (u !== null) {
+                    if (u.password === pass) {
+                        user = username;
+                        show_users_list();
+                    }
+                    else {
+                        alert("wrong password")
+                    }
+                }
+                else {
+                    alert("user does not exist")
+                }
+                // console.log(data.val())
+            })
+        }
+        function show_users_list() {
+            document.getElementById('signup_div').style.display = 'none';
+            document.getElementById('signin_div').style.display = 'none';
+            document.getElementById('user_select_div').style.display = 'block';
+
+            db.ref('olx/').once('value', function (data) {
+                console.log(data.val());
+                let users_list = data.val();
+                let str = ``;
+                for (u in users_list) {
+                    if (u !== user) {
+                        str += `<option value='${u}'>${u}</option>`;
+                    }
+                }
+                document.getElementById('users_list').innerHTML = str;
+            })
+        }
+        function select_opponent() {
+            opponent = document.getElementById('users_list').value;
+            document.getElementById('user_select_div').style.display = 'none';
+            document.getElementById('chat_div').style.display = 'block';
+            show_chat();
+            //  alert(opponent);
+        }
+        function show_chat() {
+            db.ref('olx_chat/' + user + "/" + opponent).on('value', function (data) {
+                let ur_chat = data.val();
+                let str = '';
+                if (ur_chat !== null) {
+                    console.log("ur chat",ur_chat);
+                    for(m in ur_chat){
+                        str += `<li>${m}</li>`
+                    };
+                    document.getElementById('your_chat_list').innerHTML = str;
+                }
+                else {
+                    console.log("you dont have no chat");
+                }
+            });
+            db.ref('olx_chat/' + opponent + "/" + user).on('value', function (data) {
+                let other_chat = data.val();
+                let str2 = '';
+                if (other_chat !== null) {
+                    console.log("ur chat",other_chat);
+                    for(m in other_chat){
+                        str2 += `<li>${m}</li>`
+                    };
+                    document.getElementById('other_chat_list').innerHTML = str2;
+                }
+                else {
+                    console.log("they dont have chat with you");
+                }
+            })
+        }
+        function send_message() {
+            let msg = document.getElementById('msg_input');
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today = mm + '/' + dd + '/' + yyyy;
+            db.ref('olx_chat/' + user + "/" + opponent + "/" + msg.value).set({
+                msg: msg,
+                date: today
+            }).then(()=>{
+                msg.value = ''
+            })
+        }
+    </script>
+
+</body>
+
+</html>
