@@ -60,7 +60,7 @@ function signIn() {
             button: "Done",
         });
         console.log(success);
-        window.location = '../postAdd.html'
+        window.location = '../createAdd.html'
     })
         .catch(function (error) {
             // Handle Errors here.
@@ -112,7 +112,7 @@ function logout() {
     firebase.auth().signOut()
         .then(() => {
             console.log("log out success");
-            window.location.assign("signin.html");
+            window.location.assign("../index.html");
             // Sign-out successful.
         }).catch((error) => {
             let message = error.message;

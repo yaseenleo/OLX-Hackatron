@@ -115,13 +115,17 @@ submit.addEventListener("click", e => {
 
 // retreiving data from database
 
-    // var dbBrandName = document.getElementById("brand-name");
-    // var dbTitle = document.getElementById("brand-title");
-    // var dbModal = document.getElementById("brand-modal");
-    // var dbBrandName = document.getElementById("brand-name");
-    // var dbBrandName = document.getElementById("brand-name");
-
 firebaseDb.ref("Ads-data").on("value", function(dataSnapShot){
     let addsData = dataSnapShot.val()
     console.log(addsData);
 })
+
+function check(){
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          window.location.replace("pages/createAdd.html")
+        } else {
+            window.location.replace("pages/login/signin.html")
+        }
+      });
+}
