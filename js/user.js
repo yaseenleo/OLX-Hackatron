@@ -120,3 +120,60 @@ function logout() {
             // An error happened.
         });
 }
+
+
+
+// Retrieve Firebase Messaging object.
+const messaging = firebase.messaging();
+console.log(messaging)
+
+messaging.requestPermission().then(function () {
+    console.log('Notification permission granted.');
+    // TODO(developer): Retrieve an Instance ID token for use with FCM.
+    // ...
+})
+    .then(function () {
+        messaging.getToken()
+    })
+    .then(function(token){
+        console.log(JSON.stringify(token))
+    })
+    .catch(function (err) {
+        console.log('Unable to get permission to notify.', err);
+        swal({
+            icon: "warning",
+            text: "You have rejected the permission of notification",
+            closeOnClickOutside: false,
+            timer: 5000,
+        });
+    });
+
+
+var usersarr = []
+
+// function getEmail() {
+    let db = firebase.database();
+    db.ref('users/').on('value', function (data) {
+        let users = data.val();
+        console.log('user', users);
+        for (user1 in users) {
+            for (key in users[user1]) {
+                usersarr.push(users[user1][key]);
+            }
+        }
+        console.log("key", key)
+        console.log('serialized users', users);
+        // display_ads(ads);
+        // console.log('serialized random adds', r_ads)
+    })
+
+    console.log("array users",usersarr)
+
+    usersarr.forEach((u,i) =>{
+        var username = u.displayName;
+        console.log("username for msg", username);
+    })
+// }
+
+// let username = firebase.auth().currentUser.displayName;
+// console.log(username)

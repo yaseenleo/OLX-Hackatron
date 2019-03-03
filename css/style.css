@@ -121,3 +121,7 @@ background-color: #fff;
 .footer-text-r > span {
     font-weight: 500;
 }
+
+.text-overflow{
+    word-wrap: break-word
+}
